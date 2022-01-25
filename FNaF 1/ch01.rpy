@@ -50,3 +50,6 @@ label getting_a_job:
 
     Either way, the time for mooching is over.{w=0.2} I gotta try and find a job somewhere.
     """
+    nvl hide
+    with dissolve
+    "I went over to today's paper (which Macey conveniently left on the dining room table) and began looking through the Want Ads."
