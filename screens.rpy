@@ -116,6 +116,21 @@ screen say(who, what):
     if not renpy.variant("small"):
         add SideImage() xalign 0.0 yalign 1.0
 
+    hbox:
+        style_prefix "quick"
+
+        xalign 0.5
+        yalign 1.0
+
+        textbutton _("Back") action Rollback()
+        textbutton _("History") action ShowMenu('history')
+        textbutton _("Skip") action Skip() alternate Skip(fast=True, confirm=True)
+        textbutton _("Auto") action Preference("auto-forward", "toggle")
+        textbutton _("Save") action ShowMenu('save')
+        textbutton _("Q.Save") action QuickSave()
+        textbutton _("Q.Load") action QuickLoad()
+        textbutton _("Prefs") action ShowMenu('preferences')
+
 
 ## Make the namebox available for styling through the Character object.
 init python:
@@ -245,22 +260,7 @@ screen quick_menu():
     ## Ensure this appears on top of other screens.
     zorder 100
 
-    if quick_menu:
-
-        hbox:
-            style_prefix "quick"
-
-            xalign 0.5
-            yalign 1.0
-
-            textbutton _("Back") action Rollback()
-            textbutton _("History") action ShowMenu('history')
-            textbutton _("Skip") action Skip() alternate Skip(fast=True, confirm=True)
-            textbutton _("Auto") action Preference("auto-forward", "toggle")
-            textbutton _("Save") action ShowMenu('save')
-            textbutton _("Q.Save") action QuickSave()
-            textbutton _("Q.Load") action QuickLoad()
-            textbutton _("Prefs") action ShowMenu('preferences')
+    pass
 
 
 ## This code ensures that the quick_menu screen is displayed in-game, whenever
@@ -1326,6 +1326,21 @@ screen nvl(dialogue, items=None):
                 style "nvl_button"
 
     add SideImage() xalign 0.0 yalign 1.0
+
+    hbox:
+        style_prefix "quick"
+
+        xalign 0.5
+        yalign 1.0
+
+        textbutton _("Back") action Rollback()
+        textbutton _("History") action ShowMenu('history')
+        textbutton _("Skip") action Skip() alternate Skip(fast=True, confirm=True)
+        textbutton _("Auto") action Preference("auto-forward", "toggle")
+        textbutton _("Save") action ShowMenu('save')
+        textbutton _("Q.Save") action QuickSave()
+        textbutton _("Q.Load") action QuickLoad()
+        textbutton _("Prefs") action ShowMenu('preferences')
 
 
 screen nvl_dialogue(dialogue):
