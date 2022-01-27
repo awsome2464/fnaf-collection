@@ -1,4 +1,5 @@
 label getting_a_job:
+    $currentStory = "FNaF"
     macey "Come on, Mike!"
     scene bg apartment_tv
     show macey straight mad blank at right
@@ -138,8 +139,8 @@ label getting_a_job:
     "I didn't think that a security guard was something I'd ever have as a job, period, let alone my first one, but here we are."
     "Though, to be honest, maybe Macey was right.{w=0.5}\nMaybe it won't be such a hard job."
     window hide dissolve
-    stop music fadeout(3)
-    pause 4
+    stop music fadeout(5)
+    pause 2
     scene bg black with longdissolve
     pause 3
     $persistent.story1Chapters["ch1"] = True

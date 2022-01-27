@@ -119,8 +119,8 @@ screen say(who, what):
     hbox:
         style_prefix "quick"
 
-        xalign 0.5
-        yalign 1.0
+        xalign 0.32
+        yalign 0.98
 
         textbutton _("Back") action Rollback()
         textbutton _("History") action ShowMenu('history')
