@@ -1,4 +1,5 @@
 label interview:
+    $currentStory = "FNaF"
     "{i}The next day...{/i}"
     play sound mike_phone
     pause 5
@@ -90,7 +91,7 @@ label interview:
     pause 3
     play sound door_open
     pause 2
-    show manager at middle_close with dissolve
+    show manager normal smile at middle_close with dissolve
     window show dissolve
     manager "Ah, you must be Mike Schmidt!"
     mike "Yes, sir!"
@@ -99,33 +100,33 @@ label interview:
     play music get_the_groove
     manager "So, you wish to work as a nighttime security guard at Freddy's?"
     mike "That's right, sir."
-    manager "And why is that, exactly?"
-    manager "After all, and do forgive my bluntness, but it seems like this is the first job you've ever applied for."
+    manager frown "And why is that, exactly?"
+    manager sad "After all, and do forgive my bluntness, but it seems like this is the first job you've ever applied for."
     mike "Well, er, that's because it is, sir."
-    manager "Please, you don't need to keep calling me \"sir\". I know you must be nervous, but I encourage you to relax a bit."
+    manager normal smile "Please, you don't need to keep calling me \"sir\".{w=0.2} I know you must be nervous, but I encourage you to relax a bit."
     mike "Um...{w=0.5} Th-Thank you."
     mike "Look, to be perfectly honest, I applied here because it was the only job available that I qualified for."
-    manager "I see."
+    manager frown "I see."
     "I certainly hope that wasn't the \"wrong\" answer."
     mike "Uh, but I know I can handle the job well.{w=0.2} I've been told that what's required of me is my greatest skill."
-    manager "So you're aware of what you'll need to do, then...?"
+    manager mad "So you're aware of what you'll need to do, then...?"
     "He suddenly looked a tad more serious."
     mike "Well, uh, the ad said I'd just need to watch the security cameras and ensure everything's safe, so it can't be that bad, can it?"
-    manager "Ah.{w=0.5} Well, yes, it really is that simple."
+    manager sad smile "Ah.{w=0.5} Well, yes, it really is that simple."
     "And just like that, he went back to normal.{w=0.2} Was I just imagining things there?"
-    manager "Yes, as the ad stated, your duties essentially boil down to you sitting in a security office at the back of the restaurant and watching the security feed."
+    manager normal "Yes, as the ad stated, your duties essentially boil down to you sitting in a security office at the back of the restaurant and watching the security feed."
     manager "There's really no need to be concerned about anyone breaking in, mind you, but we'd rather be safe than sorry."
     mike "That makes sense."
-    manager "Now, that being said, should you get this position, your primary focus should be on the animatronic characters we have on stage."
+    manager frown "Now, that being said, should you get this position, your primary focus should be on the animatronic characters we have on stage."
     mike "Why's that?"
     manager "They're our biggest money-makers, for starters.{w=0.2} Plus, as I'm sure you may have noticed, they're not as new as they used to be."
     manager "Essentially, we just want to make sure nothing bad happens to them.{w=0.2} Those particular models are irreplaceable."
-    manager "We would invest in some newer models, but it's not financially possible for us at the moment."
+    manager sad "We would invest in some newer models, but it's not financially possible for us at the moment."
     mike "Ah.{w=0.2} I see."
     "I suppose that makes sense; I can't imagine even one of those things being cheap, let alone three of them."
-    manager "So as I said, we just want every precaution possible to make sure they stay in good condition.{w=0.2} Kinda hard to have a show without ol' Freddy, Bonnie, and Chica on stage."
+    manager smile "So as I said, we just want every precaution possible to make sure they stay in good condition.{w=0.2} Kinda hard to have a show without ol' Freddy, Bonnie, and Chica on stage."
     "Freddy, Bonnie, and Chica, eh?{w}\nFreddy Fazbear and Bonnie the Bunny makes sense, I suppose, but Chica the Duck?{w=0.2} I don't get that one."
-    manager "Well, Mr. Schmidt, I'll be honest with you:"
+    manager normal "Well, Mr. Schmidt, I'll be honest with you:"
     manager "You definitely seem like the responsible type based on what I've seen from you just in this interview, and the job is fairly simple to handle."
     manager "While I won't make any promises, I'd say your chances are great."
     "Well, that's certainly relieving!"

@@ -1,4 +1,5 @@
 label orientation:
+    $currentStory = "FNaF"
     "{i}A few days later...{/i}"
     scene bg apartment_tv
     show macey normal straight blank at middle
@@ -41,7 +42,7 @@ label orientation:
     "I could hear footsteps approaching from one of the hallways.{w}\nHopefully it's not a burglar or something;{w=0.2} I'm still off duty!"
     scene bg freddys_dining_night with dissolve
     pause 1
-    show manager at middle with longdissolve
+    show manager normal smile at middle with longdissolve
     pause 1
     manager "Good evening, Mr. Schmidt!{w=0.2}\nHere a bit early, I see."
     mike "Well, I'd rather be a bit early than a bit late."
@@ -78,16 +79,16 @@ label orientation:
     mike "Yeah?"
     hide screen nose_honk
     scene bg freddys_leftdoor
-    show manager at middle_close
+    show manager sad frown at middle
     with dissolve
     manager "As I alluded to during your interview, we're not in the best financial situation."
     manager "So, during your shift, the building will be running on a power generator that, when utilized properly, will last you over 6 hours."
     mike "Well, that shouldn't be a problem, right?"
-    manager "Correct.{w=0.2} But the more electrical objects are used, the faster it will drain, and you may end up using a lot of said objects during a shift."
+    manager normal "Correct.{w=0.2} But the more electrical objects are used, the faster it will drain, and you may end up using a lot of said objects during a shift."
     manager "The cameras use power, the security doors use power, the door lights use power...{w}\nHeck, even the lights in your room use power!"
     mike "Oh."
     "When he puts it all like that, it sounds rather concerning.{w=0.2} Am I really going to have enough power to last the whole night...?"
-    manager "Don't fret, however;{w=0.5} there's a meter on your desk that will tell you what percentage the generator is at."
+    manager smile "Don't fret, however;{w=0.5} there's a meter on your desk that will tell you what percentage the generator is at."
     show screen nose_honk
     scene bg freddys_office:
         xalign fnaf1OfficeXAlign
@@ -95,21 +96,21 @@ label orientation:
     "I looked back at the desk and saw the meter he was referring to."
     "It's currently at 100\%, so that's a bit of a relief."
     scene bg freddys_leftdoor
-    show manager at middle_close
+    show manager normal frown at middle
     with dissolve
     manager "So just be mindful of your power consumption.{w=0.5} Nobody wants to be here alone in total darkness, heh..."
     "Noted."
-    manager "Oh, yeah.{w=0.2} One more thing:"
-    "He then pulled a clipboard out of his satchel, along with a pen from his jacket."
-    manager "I just need you to sign this, please."
+    manager smile "Oh, yeah.{w=0.2} One more thing:"
+    "He then pointed to a piece of paper and pen on the middle of the desk."
+    manager "I just need you to sign that, please."
     mike "What is it?"
     manager "It's just a basic employee contract."
-    manager "There's nothing serious to it.{w=0.2} It's just you agreeing that you will be present at all times during your shift, won't break anything, steal anything, yadda yadda."
+    manager sad "There's nothing serious to it.{w=0.2} It's just you agreeing that you will be present at all times during your shift, won't break anything, steal anything, yadda yadda."
     mike "Ah.{w=0.2} Alright, then."
-    "I then took the pen and clipboard and skimmed through the contract."
+    "I then picked up the pen and skimmed through the contract."
     "There were paragraphs upon paragraphs of stuff, but it was only one page long, and it all seemed to have the general gist of what he had just stated."
-    "So I signed the contract and handed the stuff back to him."
-    manager "Great!"
+    "So I signed the contract and handed the stuff to him."
+    manager normal "Great!"
     "He then looked at his watch."
     manager "Well, it's just about time for your shift.{w=0.2} Have a good night, Mr. Schmidt."
     mike "You, too."
@@ -126,7 +127,8 @@ label orientation:
     "I then heard a clock chime right above me."
     "It's officially midnight and the start of my shift."
     "Let's hope it'll be an easy and quick night..."
+    stop music fadeout(3)
     window hide dissolve
-    pause 2
+    pause 4
     $persistent.story1Chapters["ch3"] = True
     jump fnaf_night_1
