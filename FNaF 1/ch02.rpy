@@ -1,4 +1,5 @@
 label interview:
+    $persistent.story1Chapters["ch2"] = True
     $currentStory = "FNaF"
     "{i}The next day...{/i}"
     play sound mike_phone
@@ -142,5 +143,4 @@ label interview:
     pause 2
     scene bg black with longdissolve
     pause 3
-    $persistent.story1Chapters["ch2"] = True
     jump orientation

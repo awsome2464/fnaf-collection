@@ -1,4 +1,5 @@
 label orientation:
+    $persistent.story1Chapters["ch3"] = True
     $currentStory = "FNaF"
     "{i}A few days later...{/i}"
     scene bg apartment_tv
@@ -53,7 +54,7 @@ label orientation:
     scene bg freddys_lefthall with dissolve
     "Between the darkness and echoes, going down this hallway was actually making my hands shake a bit."
     "I'm not even usually one to get scared that easily, yet something about this atmosphere is really getting to me."
-    "The manager seems to have read my mind, because he then began talking."
+    "The manager seemed to have read my mind, because he then began talking."
     manager "I know it can be a bit scary here without the light. There's just no point in having them on if no one is here, you know?"
     mike "Sure.{w=0.2} Makes sense."
     manager "But don't worry, though;{w=0.2} there's plenty of light in your office."
@@ -98,7 +99,7 @@ label orientation:
     scene bg freddys_leftdoor
     show manager normal frown at middle
     with dissolve
-    manager "So just be mindful of your power consumption.{w=0.5} Nobody wants to be here alone in total darkness, heh..."
+    manager "So just be mindful of your power consumption.{w=0.5}\nNobody wants to be here alone in total darkness, heh..."
     "Noted."
     manager smile "Oh, yeah.{w=0.2} One more thing:"
     "He then pointed to a piece of paper and pen on the middle of the desk."
@@ -130,5 +131,4 @@ label orientation:
     stop music fadeout(3)
     window hide dissolve
     pause 4
-    $persistent.story1Chapters["ch3"] = True
     jump fnaf_night_1

@@ -1,37 +1,31 @@
 label fnaf_night_1:
+    $persistent.story1Chapters["ch4"] = True
     $currentStory = "FNaF"
+    scene bg freddys_office
+    play ambience fnaf1_office_ambience
     window show dissolve
     "It was eerily quiet in here."
     "The only real sound I could hear was coming from the fan on my desk and the old lights above me."
     "I decided to focus away from that by actually doing my job."
     "I pressed the power button on the monitor in front of me."
-    window hide
-    play sound cam_up
-    scene cam freddys_stage default at camera_pan
-    show screen cam_feed
-    hide screen nose_honk
+    call fnaf_cam_up("freddys_stage default")
     pause 1
-    window show dissolve
     "The 3 animatronics were on the stage, completely lifeless."
     "If they didn't look unsettling before, they certainly do now."
     "Just for kicks, I switched to another cam."
-    window hide
-    play sound blip
-    show cam freddys_pas default at camera_pan
+    call fnaf_cam_switch("freddys_pas default")
     pause 1
-    window show dissolve
     "This looks like it's backstage."
     "There's something a bit unnerving about seeing all of these robotic parts and costumes laid around like this..."
     play sound fnaf_phone_ring loop
     "Suddenly, the phone in my office started to ring!"
     "After calming myself down from that unexpected surprise, I asked myself who that could possibly be."
     "Well, I suppose there's only one way to find out."
-    play sound2 cam_down
-    scene bg freddys_office
-    hide screen cam_feed
-    show screen nose_honk
+    call fnaf_cam_down
     queue sound fnaf_phone_pickup
     "I turned off the monitor and answered the phone."
+    if renpy.music.get_playing("sound"):
+        play sound fnaf_phone_pickup_short
     mike "Hello?"
     phone "Uh, hello? Hello?"
     phone "Uh, I wanted to record a message for you to help you get settled in on your first night."
@@ -93,20 +87,12 @@ label fnaf_night_1:
     "He had me going there for a while, but come on.{w=0.5}\nGrabbing me and shoving me inside a suit?{w=0.5}\nSeeing me as an endoskeleton?{w=0.5}\nBeing able to move, at all??"
     "He's clearly just trying to fuck with the new guy and freak him out on his first shift.{w=0.5} Well, joke's on you, buddy; it ain't gonna happen."
     "Though, just out of curiosity, I turned the security feed back on."
-    window hide
-    play sound cam_up
-    scene cam freddys_stage default at camera_pan
-    show screen cam_feed
-    hide screen nose_honk
+    call fnaf_cam_up("freddys_stage default")
     pause 1
-    window show dissolve
     "As suspected, all three of them were still there."
     "I chuckled to myself for believing anything that guy said and shut off the monitor."
     window hide
-    play sound cam_down
-    scene bg freddys_office
-    show screen nose_honk
-    hide screen cam_feed
+    call fnaf_cam_down
     pause 1
     window show dissolve
     "I gave a small yawn as I stretched in my seat."
@@ -146,25 +132,20 @@ label fnaf_night_1:
     "I quickly turned on the monitor to see what was happening."
     "What I saw when I did made my heart stop for a second."
     window hide
-    play sound cam_up
-    scene cam freddys_stage nobon at camera_pan
-    show screen cam_feed
-    hide screen nose_honk
+    call fnaf_cam_up("freddys_stage nobon")
     play music fnaf1_moving_ambience fadein 2
+    show screen ambient_sounds
     pause 2
     window show dissolve
     "There was a brown bear and a yellow bird, but no purple bunny!"
     "I looked around nearby cameras to see if I could find him."
     window hide dissolve
     pause 0.2
-    play sound blip
-    show cam freddys_pas default at camera_pan
+    call fnaf_cam_switch("freddys_pas default")
     pause 1.5
-    play sound blip
-    show cam freddys_restroom default at camera_pan
+    call fnaf_cam_switch("freddys_restroom default")
     pause 1.5
-    play sound blip
-    show cam freddys_dining bon at camera_pan
+    call fnaf_cam_switch("freddys_dining bon")
     pause 2
     window show dissolve
     "There he was, right in the dining area!"
@@ -172,10 +153,7 @@ label fnaf_night_1:
     "..."
     "There's no way that the guy on the phone was telling the truth."
     "There's no way in hell that it used a \"free-roaming mode\" to get over there."
-    play sound cam_down
-    scene bg freddys_office
-    show screen nose_honk
-    hide screen cam_feed
+    call fnaf_cam_down
     "I turned off the monitor and tried to calm myself down."
     mike "Come on, Mike.{w=0.2} Don't freak out here."
     mike "All it's doing is standing there.{w=0.2} It won't hurt you."
@@ -183,22 +161,62 @@ label fnaf_night_1:
     play sound fnaf_footsteps
     pause 1.5
     "At the sound of those footsteps, I turned the monitor back on!"
-    play sound cam_up
-    scene cam freddys_dining chica at camera_pan
-    show screen cam_feed
-    hide screen nose_honk
+    call fnaf_cam_up("freddys_dining chica")
     pause 1
     "Oh, shit;{w=0.2} not only is he gone, but now Chica is moving, too??"
     "Well, I should at least try to find Bonnie...{w=0.2} He couldn't have gotten far."
     window hide dissolve
     pause 0.2
-    play sound blip
-    show cam freddys_piratecove_01 at camera_pan
+    call fnaf_cam_switch("freddys_piratecove_01")
     pause 1.5
-    play sound blip
-    show cam freddys_pas bonnie at camera_pan
+    call fnaf_cam_switch("freddys_pas bonnie")
     pause 1.5
     window show dissolve
     "Gotcha."
+    "Out of the corner of my eye, I saw the power meter on the desk.{w=0.2} It was currently at 77\%."
+    "I guess I haven't really been using many things tonight, so it's only natural for it to still be pretty high."
+    "Still, since I know where everyone is, I better shut the camera off just to be safe."
+    call fnaf_cam_down
+    pause 1
+    "Okay, so 2 of those things are moving right now."
+    "Surely it can't be that bad, right?"
+    "I mean, okay, the guy on the phone was right about them moving around at night, but the rest of that shit about them seeing me as an endoskeleton and stuffing me in a suit that will kill me?"
+    "That just sounds ridiculous!{w=0.2} These are just entertainment robots! They can't be that high-tech, especially ones that look as old as them!"
+    "..."
+    "And yet a part of me doesn't want to take that risk."
+    "Let's check up on them real quick..."
+    call fnaf_cam_up("freddys_pas bonnie")
+    pause 2
+    call fnaf_cam_switch("freddys_stage freddy")
+    pause 2
+    call fnaf_cam_switch("freddys_restroom chica")
+    pause 2
+    "Calm down, Mike;{w=0.2} it's not actually looking at you."
+    call fnaf_cam_down
+    "I covered my face took a deep breath, trying to calm myself."
+    "This can't be real."
+    "I must still be asleep."
+    "It's just one big, very-realistic dream."
+    "Though if it is a dream, I suppose it could be a lot scarier."
+    call fnaf_kitchen
+    pause 0.5
+    "I could then hear some noise from somewhere near the front of the building!"
+    call fnaf_cam_up("freddys_restroom default")
+    pause 1.5
+    call fnaf_cam_switch("freddys_dining default")
+    pause 1.5
+    call fnaf_cam_switch("bg black")
+    pause 1.5
+    call fnaf_kitchen
+    "I could hear that noise coming from the kitchen, but the video feed was offline, for some reason."
+    "Well, someone is definitely in there..."
+    stop kitchen
+    call fnaf_cam_switch("freddys_stage freddy")
+    pause 1.5
+    call fnaf_cam_switch("freddys_dining bon")
+    pause 1.5
+    "Well, it looks like Chica is our culprit."
+    call fnaf_cam_down
+    "So far, they've been keeping their distance from me, which is good."
 
     return

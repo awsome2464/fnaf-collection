@@ -7,6 +7,8 @@
 define eyesclose = ImageDissolve(image="Blinking.png", time=2, ramplen=64)
 define fastblinkclose = ImageDissolve(image="Blinking.png", time=0.1, ramplen=256, reverse=False)
 define fastblinkopen = ImageDissolve(image="Blinking.png", time=0.1, ramplen=256, reverse=True)
+define monitoroff = ImageDissolve(image="Monitor On.png", time=0.2, reverse=True)
+define monitoron = ImageDissolve(image="Monitor On.png", time=0.2)
 
 # Transforms ########################################################################################################################################################################
 transform camera_pan:
@@ -37,6 +39,11 @@ transform sceneblur:
     blur 10
 
 # Styles #########################################################################################################################################################################
+style camtext:
+    font "fonts/Pixel Digivolve.otf"
+    text_align 0.5
+    size 50
+
 style splash:
     font "fonts/Typo.ttf"
     size 50
@@ -127,12 +134,9 @@ layeredimage manager:
 image mike = Placeholder("boy")
 
 # Animations ########################################################################################################################################################################
-image blinking:
-    "#000000"
-
 image camera_static:
     size(1920, 1080)
-    alpha 0.25
+    alpha 0.2
     "Animations/Camera Static/01.png"
     pause 0.05
     "Animations/Camera Static/02.png"
@@ -173,6 +177,7 @@ image recording:
 # Backgrounds #######################################################################################################################################################################
 
 image bg black = "#000000"
+image bg white = "#ffffff"
 
 # FNaF
 image bg apartment_dining = "#007021"
@@ -193,10 +198,16 @@ image bg freddys_outside_night = "#8f5a96"
 
 image cam freddys_dining bon:
     zoom 1.5
-    "Backgrounds/FNaF 1 Dining Bonnie.png"
+    choice:
+        "Backgrounds/FNaF 1 Dining Bonnie 01.png"
+    choice:
+        "Backgrounds/FNaF 1 Dining Bonnie 02.png"
 image cam freddys_dining chica:
     zoom 1.5
-    "Backgrounds/FNaF 1 Dining Chica.png"
+    choice:
+        "Backgrounds/FNaF 1 Dining Chica 01.png"
+    choice:
+        "Backgrounds/FNaF 1 Dining Chica 02.png"
 image cam freddys_dining default:
     zoom 1.5
     "Backgrounds/FNaF 1 Dining Default.png"
@@ -209,6 +220,9 @@ image cam freddys_pas default:
 image cam freddys_piratecove_01:
     zoom 1.5
     "Backgrounds/FNaF 1 Pirate Cove 01.png"
+image cam freddys_restroom chica:
+    zoom 1.5
+    "Backgrounds/FNaF 1 Restrooms Chica.png"
 image cam freddys_restroom default:
     zoom 1.5
     "Backgrounds/FNaF 1 Restrooms Default.png"
@@ -218,6 +232,9 @@ image cam freddys_stage nobon:
 image cam freddys_stage default:
     zoom 1.5
     "Backgrounds/FNaF 1 Stage Default.png"
+image cam freddys_stage freddy:
+    zoom 1.5
+    "Backgrounds/FNaF 1 Stage Freddy.png"
 
 # CGs ################################################################################################################################################################################
 
@@ -240,9 +257,11 @@ image splashtext = ParameterizedText(style="splash")
 
 # Custom Channels
 init python:
+    renpy.music.register_channel("ambience", "music", loop=True)
+    renpy.music.register_channel("ambience2", "music", loop=True)
+    renpy.music.register_channel("kitchen", "sound", loop=False)
     renpy.music.register_channel("sound2", "sound", loop=False)
     renpy.music.register_channel("sound3", "sound", loop=False)
-    renpy.music.register_channel("ambience", "music", loop=True)
 
 # Ambience
 define audio.fnaf1_idle_ambience = "audio/ambience/fnaf1_idle_ambience.ogg"
@@ -269,6 +288,7 @@ define audio.fnaf_chime = "audio/se/fnaf_chime.ogg"
 define audio.fnaf_footsteps = "audio/se/fnaf_footsteps.wav"
 define audio.fnaf_phone_hangup = "audio/se/fnaf_phone_hangup.ogg"
 define audio.fnaf_phone_pickup  = "audio/se/fnaf_phone_pickup.ogg"
+define audio.fnaf_phone_pickup_short = "audio/se/fnaf_phone_pickup_short.ogg"
 define audio.fnaf_phone_ring = "audio/se/fnaf_phone_ring.ogg"
 define audio.manager_footsteps = "audio/se/manager_footsteps.ogg"
 define audio.mike_phone = "audio/se/mike_phone.mp3"
@@ -277,10 +297,21 @@ define audio.phone_guy_throat = "audio/se/phone_guy_throat.ogg"
 define audio.pizza_door = "audio/se/pizza_door.mp3"
 
 # Screens #############################################################################################################################################################################
+screen ambient_sounds():
+    if currentStory == "FNaF":
+        timer circusTimer repeat True action [Play("ambience2", "audio/ambience/circus.ogg", None, loop=False), SetVariable("circusTimer", renpy.random.choice([60, 120, 180]))]
+
 screen cam_feed():
-    add "camera_static"
+    if currentCam != "bg black":
+        add "cam [currentCam]" at camera_pan
+    else:
+        add "bg black"
+    if currentCam != "bg black":
+        add "camera_static"
     add "Camera Border.png" size(1920, 1080)
     add "recording" xalign 0.03 yalign 0.05
+    if currentCam == "bg black":
+        text "CAMERA DISABLED\nAUDIO ONLY" style "camtext" xalign 0.5 yalign 0.05
 
 screen nose_honk():
     if currentStory == "FNaF":
@@ -303,17 +334,21 @@ define longdissolve = Dissolve(3.0)
 # Variables ###########################################################################################################################################################################
 define config.menu_include_disabled = True
 default persistent.storiesUnlocked = {"FNaF": True, "GF": False, "GR": False, "FF": False, "LN": False, "SL": False, "TF": False}
-default persistent.story1Chapters = {"ch1": False, "ch2": False, "ch3": False, "ch4": False}
+default persistent.story1Chapters = {"ch1": False, "ch2": False, "ch3": False, "ch4": False, "ch5": False}
+default circusTimer = renpy.random.choice([60, 120, 180])
+default currentCam = "freddys_stage default"
 default currentStory = None
 default fnaf1OfficeXAlign = 0.5
+default fnafAmbientSongChance = 0
 default jName = "Hobo"
+default kitchen = 0
 default mName = "Manager"
 default pgName = "???"
 
 # Labels ##############################################################################################################################################################################
 label splashscreen:
     show splashtext "{color=#db0000}{size=+20}Notice:{/size}{/color}\nThe following is a collection of {color=#db0000}fan made{/color} stories that have no affiliation with Scott Cawthon or the Five Nights at Freddy's brand.\n\nThese stories also contain mature themes and content and are {color=#db0000}intended for mature audiences{/color}." at truecenter with longdissolve
-    pause 7
+    pause 6
     hide splashtext with longdissolve
     pause 1
     return
@@ -351,8 +386,59 @@ label fnaf_options:
                     jump orientation
                 "Night 1" if persistent.story1Chapters["ch4"]:
                     jump fnaf_night_1
+                "Confrontation" if persistent.story1Chapters["ch5"]:
+                    pass
 
         "Back":
             jump start
 
+    return
+
+# Common Events
+
+# FNaF
+label fnaf_ambient_songs:
+    $fnafAmbientSongChance = renpy.random.randint(1,5)
+    if fnafAmbientSongChance == 1:
+        play ambience2 "audio/ambience/circus.wav" noloop
+    return
+
+label fnaf_cam_up(startingCam):
+    $currentCam = startingCam
+    play sound2 cam_up
+    scene bg white with monitoron
+    show screen cam_feed
+    hide screen nose_honk
+    return
+
+label fnaf_cam_down:
+    play sound2 cam_down
+    show screen nose_honk
+    hide screen cam_feed
+    scene bg freddys_office with monitoroff
+    return
+
+label fnaf_cam_switch(newCam):
+    $currentCam = newCam
+    play sound2 blip
+    return
+
+label fnaf_kitchen:
+    if renpy.get_screen("cam_feed"):
+        $renpy.music.set_volume(volume=1.0, channel="kitchen")
+        $renpy.music.set_pan(pan=0, delay=0, channel="kitchen")
+    else:
+        $renpy.music.set_volume(volume=0.25, channel="kitchen")
+        $renpy.music.set_pan(pan=1, delay=0, channel="kitchen")
+
+    $kitchen = renpy.random.randint(1,4)
+
+    if kitchen == 1:
+        play kitchen "audio/se/kitchen_01.wav"
+    elif kitchen == 2:
+        play kitchen "audio/se/kitchen_02.wav"
+    elif kitchen == 3:
+        play kitchen "audio/se/kitchen_03.wav"
+    elif kitchen == 4:
+        play kitchen "audio/se/kitchen_04.wav"
     return

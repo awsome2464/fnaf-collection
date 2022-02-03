@@ -1,4 +1,5 @@
 label getting_a_job:
+    $persistent.story1Chapters["ch1"] = True
     $currentStory = "FNaF"
     macey "Come on, Mike!"
     scene bg apartment_tv
@@ -143,5 +144,4 @@ label getting_a_job:
     pause 2
     scene bg black with longdissolve
     pause 3
-    $persistent.story1Chapters["ch1"] = True
     jump interview
