@@ -191,7 +191,7 @@ label fnaf_night_1:
     pause 2
     call fnaf_cam_switch("freddys_restroom chica")
     pause 2
-    "Calm down, Mike;{w=0.2} it's not actually looking at you."
+    "I don't know if it's just the situation getting to me, but they look even more disturbing than ever before."
     call fnaf_cam_down
     "I covered my face took a deep breath, trying to calm myself."
     "This can't be real."
@@ -217,6 +217,37 @@ label fnaf_night_1:
     pause 1.5
     "Well, it looks like Chica is our culprit."
     call fnaf_cam_down
-    "So far, they've been keeping their distance from me, which is good."
-
-    return
+    "So far, they've only been in the front half of the building, which is good."
+    "And it's only been Bonnie and Chica moving around, with Freddy still staying on stage the entire time."
+    call fnaf_cam_up("freddys_pas bonnie")
+    pause 1.5
+    call fnaf_cam_switch("freddys_stage freddy")
+    pause 1.5
+    call fnaf_cam_switch("freddys_restroom chica")
+    pause 2
+    call fnaf_cam_down
+    pause 1
+    "It eventually got to the point where I could feel myself calming down a bit more, as they really didn't pose an immediate threat to me."
+    "Still, the idea that these things are walking around at all is definitely making me feel uneasy."
+    "All the while, I couldn't get the phone guy's warning out of my mind, that if they caught me, I'd essentially be a dead man."
+    play sound fnaf_chime
+    stop music fadeout(3)
+    stop ambience fadeout(3)
+    stop ambience2 fadeout(3)
+    hide screen ambient_sounds
+    "Before long, though, I heard the clock above me ring!"
+    "6 AM!{w=0.2} Hallelujah!"
+    play sound2 fnaf_footsteps
+    "I could still hear the footsteps, though."
+    call fnaf_cam_up("freddys_stage default")
+    pause 2
+    "Back on the stage they go, I suppose."
+    "Maybe it's coded into them to be back in their proper place before their \"free-roaming\" ends?"
+    $renpy.music.set_volume(volume=0.5, channel="sound")
+    play sound pizza_door
+    "I heard the front doors opening up;{w=0.2} that must be the manager here to relieve me of my shift."
+    "I've definitely got some choice words for him!"
+    call fnaf_cam_down
+    hide screen nose_honk
+    pause 1
+    jump confrontation

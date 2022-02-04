@@ -119,7 +119,7 @@ screen say(who, what):
     hbox:
         style_prefix "quick"
 
-        xalign 0.32
+        xalign 0.5
         yalign 0.98
 
         textbutton _("Back") action Rollback()
@@ -295,7 +295,7 @@ screen navigation():
         style_prefix "navigation"
 
         xpos gui.navigation_xpos
-        yalign 0.5
+        yalign 0.95
 
         spacing gui.navigation_spacing
 
@@ -311,7 +311,7 @@ screen navigation():
 
         textbutton _("Load") action ShowMenu("load")
 
-        textbutton _("Preferences") action ShowMenu("preferences")
+        textbutton _("Options") action ShowMenu("preferences")
 
         if _in_replay:
 
@@ -358,6 +358,7 @@ screen main_menu():
     tag menu
 
     add gui.main_menu_background
+    add "camera_static"
 
     ## This empty frame darkens the main menu.
     frame:
@@ -366,6 +367,7 @@ screen main_menu():
     ## The use statement includes another screen inside this one. The actual
     ## contents of the main menu are in the navigation screen.
     use navigation
+    text "{size=+20}[config.name!t]{/size}" xalign 0.5 yalign 0.05
 
     if gui.show_name:
 
@@ -389,7 +391,7 @@ style main_menu_frame:
     xsize 420
     yfill True
 
-    background "gui/overlay/main_menu.png"
+    #background "gui/overlay/main_menu.png"
 
 style main_menu_vbox:
     xalign 1.0
@@ -531,9 +533,9 @@ style game_menu_label_text:
     yalign 0.5
 
 style return_button:
-    xpos gui.navigation_xpos
-    yalign 1.0
-    yoffset -45
+    xpos 200
+    yalign 0.965
+    #yoffset -45
 
 
 ## About screen ################################################################

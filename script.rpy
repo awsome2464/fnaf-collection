@@ -84,6 +84,7 @@ define mrs_fitz = Character("Mom", image="mrs_fitz", what_prefix='"', what_suffi
 define mrs_schmidt = Character("Mom", image="mrs_schmidt", what_prefix='"', what_suffix='"')
 define narrate = nvl_narrator
 define phone = Character("[pgName]", what_prefix='"', what_suffix='"', what_italic=True)
+define plushtrap = Character("[ptName]", what_prefix='"', what_suffix='"', what_italic=True)
 define tyler = Character("Tyler", image="tyler", what_prefix='"', what_suffix='"')
 define vlad = Character("Vlad", image="vlad", what_prefix='"', what_suffix='"', what_italic=True)
 
@@ -174,6 +175,57 @@ image recording:
     linear 0.0 alpha 1.0
     repeat
 
+image title:
+    "gui/main_menu.png"
+    choice:
+        pause 1.5
+    choice:
+        pause 1.5
+    choice:
+        pause 2.5
+    choice:
+        pause 2.5
+    choice:
+        pause 0.5
+    choice:
+        pause 0.5
+    choice:
+        "Title/Circus Baby.png"
+        pause 0.25
+        "gui/main_menu.png"
+        pause 0.5
+    choice:
+        "Title/Freddy.png"
+        pause 0.25
+        "gui/main_menu.png"
+        pause 0.5
+    choice:
+        "Title/Golden Freddy.png"
+        pause 0.25
+        "gui/main_menu.png"
+        pause 0.5
+    choice:
+        "Title/Nightmare Fredbear.png"
+        pause 0.25
+        "gui/main_menu.png"
+        pause 0.5
+    choice:
+        "Title/Scrap Baby.png"
+        pause 0.25
+        "gui/main_menu.png"
+        pause 0.5
+    choice:
+        "Title/Springtrap.png"
+        pause 0.25
+        "gui/main_menu.png"
+        pause 0.5
+    choice:
+        "Title/Toy Freddy.png"
+        pause 0.25
+        "gui/main_menu.png"
+        pause 0.5
+    repeat
+
 # Backgrounds #######################################################################################################################################################################
 
 image bg black = "#000000"
@@ -222,7 +274,10 @@ image cam freddys_piratecove_01:
     "Backgrounds/FNaF 1 Pirate Cove 01.png"
 image cam freddys_restroom chica:
     zoom 1.5
-    "Backgrounds/FNaF 1 Restrooms Chica.png"
+    choice:
+        "Backgrounds/FNaF 1 Restrooms Chica 01.png"
+    choice:
+        "Backgrounds/FNaF 1 Restrooms Chica 02.png"
 image cam freddys_restroom default:
     zoom 1.5
     "Backgrounds/FNaF 1 Restrooms Default.png"
@@ -272,6 +327,8 @@ define audio.fnaf1_office_ambience = "audio/ambience/fnaf1_office_ambience.ogg"
 define audio.get_the_groove = "audio/music/Get the Groove.mp3"
 define audio.happy_birthday = "audio/music/Happy Birthday.mp3"
 define audio.movement = "audio/music/Movement.mp3"
+define audio.music_box = "audio/music/Music Box.ogg"
+define audio.night_stalker = "audio/music/Night Stalker.mp3"
 define audio.round_and_round = "audio/music/Round and Round We Go.mp3"
 
 # Sound Effects
@@ -293,6 +350,7 @@ define audio.fnaf_phone_ring = "audio/se/fnaf_phone_ring.ogg"
 define audio.manager_footsteps = "audio/se/manager_footsteps.ogg"
 define audio.mike_phone = "audio/se/mike_phone.mp3"
 define audio.paper_phone = "audio/se/paper_phone.ogg"
+define audio.paper_rip = "audio/se/paper_rip.mp3"
 define audio.phone_guy_throat = "audio/se/phone_guy_throat.ogg"
 define audio.pizza_door = "audio/se/pizza_door.mp3"
 
@@ -334,7 +392,7 @@ define longdissolve = Dissolve(3.0)
 # Variables ###########################################################################################################################################################################
 define config.menu_include_disabled = True
 default persistent.storiesUnlocked = {"FNaF": True, "GF": False, "GR": False, "FF": False, "LN": False, "SL": False, "TF": False}
-default persistent.story1Chapters = {"ch1": False, "ch2": False, "ch3": False, "ch4": False, "ch5": False}
+default persistent.story1Chapters = {"ch1": False, "ch2": False, "ch3": False, "ch4": False, "ch5": False, "ch6": False}
 default circusTimer = renpy.random.choice([60, 120, 180])
 default currentCam = "freddys_stage default"
 default currentStory = None
@@ -344,16 +402,24 @@ default jName = "Hobo"
 default kitchen = 0
 default mName = "Manager"
 default pgName = "???"
+default ptName = "???"
 
 # Labels ##############################################################################################################################################################################
 label splashscreen:
-    show splashtext "{color=#db0000}{size=+20}Notice:{/size}{/color}\nThe following is a collection of {color=#db0000}fan made{/color} stories that have no affiliation with Scott Cawthon or the Five Nights at Freddy's brand.\n\nThese stories also contain mature themes and content and are {color=#db0000}intended for mature audiences{/color}." at truecenter with longdissolve
-    pause 6
+    play music "audio/music/Title Intro.ogg"
+    pause 0.5
+    show splashtext "{color=#db0000}{size=+20}Notice:{/size}{/color}\nThe following is a collection of {color=#db0000}fan made stories{/color} that have no affiliation with Scott Cawthon or the Five Nights at Freddy's brand.\n\nThese stories also contain mature themes and content and are {color=#db0000}intended for mature audiences{/color}." at truecenter with longdissolve
+    pause 5
     hide splashtext with longdissolve
     pause 1
     return
 
+label before_main_menu:
+    play sound "audio/se/static.wav"
+    return
+
 label start:
+    stop music fadeout(3)
     menu:
         "Five Nights at Freddy's":
             jump fnaf_options
@@ -387,6 +453,10 @@ label fnaf_options:
                 "Night 1" if persistent.story1Chapters["ch4"]:
                     jump fnaf_night_1
                 "Confrontation" if persistent.story1Chapters["ch5"]:
+                    jump confrontation
+                "How it Went" if persistent.story1Chapters["ch6"]:
+                    jump how_it_went
+                "Night 2" if persistent.story1Chapters["ch7"]:
                     pass
 
         "Back":
@@ -397,13 +467,8 @@ label fnaf_options:
 # Common Events
 
 # FNaF
-label fnaf_ambient_songs:
-    $fnafAmbientSongChance = renpy.random.randint(1,5)
-    if fnafAmbientSongChance == 1:
-        play ambience2 "audio/ambience/circus.wav" noloop
-    return
-
 label fnaf_cam_up(startingCam):
+    window hide dissolve
     $currentCam = startingCam
     play sound2 cam_up
     scene bg white with monitoron
@@ -416,6 +481,7 @@ label fnaf_cam_down:
     show screen nose_honk
     hide screen cam_feed
     scene bg freddys_office with monitoroff
+    window show dissolve
     return
 
 label fnaf_cam_switch(newCam):
