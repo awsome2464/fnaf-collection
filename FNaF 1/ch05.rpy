@@ -56,4 +56,5 @@ label confrontation:
     pause 1
     scene bg black with longdissolve
     pause 1
+    window show
     jump how_it_went

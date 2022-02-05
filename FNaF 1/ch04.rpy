@@ -3,6 +3,7 @@ label fnaf_night_1:
     $currentStory = "FNaF"
     scene bg freddys_office
     play ambience fnaf1_office_ambience
+    show screen nose_honk
     window show dissolve
     "It was eerily quiet in here."
     "The only real sound I could hear was coming from the fan on my desk and the old lights above me."

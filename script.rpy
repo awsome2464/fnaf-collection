@@ -7,6 +7,7 @@
 define eyesclose = ImageDissolve(image="Blinking.png", time=2, ramplen=64)
 define fastblinkclose = ImageDissolve(image="Blinking.png", time=0.1, ramplen=256, reverse=False)
 define fastblinkopen = ImageDissolve(image="Blinking.png", time=0.1, ramplen=256, reverse=True)
+define longdissolve = Dissolve(3.0)
 define monitoroff = ImageDissolve(image="Monitor On.png", time=0.2, reverse=True)
 define monitoron = ImageDissolve(image="Monitor On.png", time=0.2)
 
@@ -242,6 +243,15 @@ image bg freddys_manager = "#004a52"
 layeredimage bg freddys_office:
     always:
         "Backgrounds/FNaF 1 Office Empty.png"
+    group lights:
+        attribute left_empty:
+            "Backgrounds/FNaF 1 Office Left Empty.png"
+        attribute left_bonnie:
+            "Backgrounds/FNaF 1 Office Left Bonnie.png"
+        attribute right_empty:
+            "Backgrounds/FNaF 1 Office Right Empty.png"
+        attribute right_chica:
+            "Backgrounds/FNaF 1 Office Right Chica.png"
     always:
         "fnaf1_fan"
 
@@ -319,6 +329,7 @@ init python:
     renpy.music.register_channel("sound3", "sound", loop=False)
 
 # Ambience
+define audio.fnaf1_cam_noise = "audio/ambience/fnaf1_cam_noise.ogg"
 define audio.fnaf1_idle_ambience = "audio/ambience/fnaf1_idle_ambience.ogg"
 define audio.fnaf1_moving_ambience = "audio/ambience/fnaf1_moving_ambience.ogg"
 define audio.fnaf1_office_ambience = "audio/ambience/fnaf1_office_ambience.ogg"
@@ -340,6 +351,7 @@ define audio.children_playing = "audio/se/children_playing.wav"
 define audio.crowd = "audio/se/crowd.mp3"
 define audio.door_close = "audio/se/door_close.mp3"
 define audio.door_knock = "audio/se/door_knock.mp3"
+define audio.door_light = "audio/se/door_light.ogg"
 define audio.door_open = "audio/se/door_open.mp3"
 define audio.fnaf_chime = "audio/se/fnaf_chime.ogg"
 define audio.fnaf_footsteps = "audio/se/fnaf_footsteps.wav"
@@ -386,13 +398,10 @@ screen nose_honk():
                 pos(463, 335)
                 action Play("sound", "audio/se/nose_honk.ogg")
 
-# Transitions #########################################################################################################################################################################
-define longdissolve = Dissolve(3.0)
-
 # Variables ###########################################################################################################################################################################
 define config.menu_include_disabled = True
 default persistent.storiesUnlocked = {"FNaF": True, "GF": False, "GR": False, "FF": False, "LN": False, "SL": False, "TF": False}
-default persistent.story1Chapters = {"ch1": False, "ch2": False, "ch3": False, "ch4": False, "ch5": False, "ch6": False}
+default persistent.story1Chapters = {"ch1": False, "ch2": False, "ch3": False, "ch4": False, "ch5": False, "ch6": False, "ch7": False, "ch8": False}
 default circusTimer = renpy.random.choice([60, 120, 180])
 default currentCam = "freddys_stage default"
 default currentStory = None
@@ -419,9 +428,9 @@ label before_main_menu:
     return
 
 label start:
-    stop music fadeout(3)
     menu:
         "Five Nights at Freddy's":
+            stop music fadeout(3)
             jump fnaf_options
         "The Golden Freddy" if persistent.storiesUnlocked["GF"]:
             pass
@@ -457,6 +466,8 @@ label fnaf_options:
                 "How it Went" if persistent.story1Chapters["ch6"]:
                     jump how_it_went
                 "Night 2" if persistent.story1Chapters["ch7"]:
+                    jump fnaf_night_2
+                "Research" if persistent.story1Chapters["ch8"]:
                     pass
 
         "Back":
@@ -471,6 +482,7 @@ label fnaf_cam_up(startingCam):
     window hide dissolve
     $currentCam = startingCam
     play sound2 cam_up
+    queue sound2 fnaf1_cam_noise loop
     scene bg white with monitoron
     show screen cam_feed
     hide screen nose_honk

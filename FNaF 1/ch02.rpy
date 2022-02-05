@@ -29,7 +29,6 @@ label interview:
     play sound crowd fadein(3.0) loop
     play sound2 children_playing fadein(3.0) loop
     nvl clear
-    window hide dissolve
     nvl show dissolve
     narrate """
     Even from out here, I could hear the noise going on inside.
@@ -67,11 +66,11 @@ label interview:
 
     Children could be seen running around, though most seemed to be sitting in their seats and eating the pizza.
 
-    But the main thing that everyone's eyes seemed to be drawn to was a show stage that could be spotted at the far end of the room.
+    But the main thing that everyone's eyes seemed to be drawn to was a show stage that could be spotted along the wall.
     """
     nvl hide
+    scene cg fnaf_daytime_performance
     with dissolve
-    scene cg fnaf_daytime_performance with dissolve
     pause 1
     window show dissolve
     "Three animatronic animals could be seen performing a show for the crowd."
@@ -80,7 +79,10 @@ label interview:
     "Altogether, they all played their song while the kids cheered with excitement."
     "I gotta be honest; those robots definitely look a bit creepy and outdated, but I suppose they still get the job done."
     scene bg freddys_dining_day with dissolve
-    "Alright, time to get to the manager's office before I'm late.{w=0.2} Macey will kill me if I fuck up this interview."
+    "I then looked around the room a bit more and found something odd."
+    "There was what looked like another stage on the far side of the room, only it was covered by curtains and had a sign in front of it."
+    "{i}Pirate Cove{/i}, huh?{w=0.2}\nLooks what whatever it is, it's out of service."
+    "Alright, enough distractions;{w=0.2} time to get to the manager's office before I'm late.{w=0.2} Macey will kill me if I fuck up this interview."
     stop music fadeout(3.0)
     stop sound fadeout(3.0)
     stop sound2 fadeout(3.0)
